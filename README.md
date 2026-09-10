@@ -40,6 +40,8 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/你的部署ID/exe
 | Who has access | Anyone |
 | Web app URL | 使用 `/exec` 結尾的正式部署網址 |
 
+如果 Apps Script 不是從 Google Sheet 的 `擴充功能` > `Apps Script` 建立，`SpreadsheetApp.getActiveSpreadsheet()` 會抓不到試算表。此 repo 的 `apps-script/Code.gs` 使用 `SpreadsheetApp.openById(SPREADSHEET_ID)`，請把 `SPREADSHEET_ID` 改成你的 Google Sheet 網址中 `/d/` 和 `/edit` 中間那段 ID。
+
 ## GitHub Pages 上線方式
 
 1. 在 GitHub 建立一個新的 public repository，建議名稱為 `yong-ye-bakery`。
