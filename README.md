@@ -44,6 +44,20 @@ https://qian051790-alt.github.io/yong-ye-bakery/
 
 這個 repo 已包含 `CNAME` 檔案，內容為 `yong-ye-bakery.com`，用來讓 GitHub Pages 綁定自訂網域。
 
+## Cloudflare DNS 設定
+
+在 Cloudflare 的 `yong-ye-bakery.com` 網域中，進入 `DNS` > `Records`，新增或確認以下紀錄。Proxy status 建議先選 `DNS only`，等 GitHub Pages 顯示網域驗證完成且 HTTPS 可啟用後，再視需要改成 proxied。
+
+| Type | Name | Content |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `qian051790-alt.github.io` |
+
+如果 Cloudflare 已經有其他 `A`、`AAAA` 或 `CNAME` 紀錄使用 `@` 或 `www`，需要先確認是否為舊網站設定，避免同一個名稱指到不同主機。
+
 ## 調整商品
 
 商品資料在 `script.js` 的 `products` 陣列中。可以修改：
