@@ -33,8 +33,16 @@
 完成後，網站會出現在：
 
 ```text
+https://yong-ye-bakery.com/
+```
+
+GitHub Pages 的預設網址仍會是：
+
+```text
 https://qian051790-alt.github.io/yong-ye-bakery/
 ```
+
+這個 repo 已包含 `CNAME` 檔案，內容為 `yong-ye-bakery.com`，用來讓 GitHub Pages 綁定自訂網域。
 
 ## 調整商品
 
