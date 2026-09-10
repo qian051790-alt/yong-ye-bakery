@@ -85,6 +85,8 @@ const deliveryLabels = {
   cold: "冷藏宅配",
 };
 
+const GOOGLE_SCRIPT_URL = "";
+
 const cart = new Map();
 
 const productGrid = document.querySelector("#productGrid");
@@ -218,6 +220,31 @@ function buildOrderSummary(formData) {
 
   return {
     orderId,
+    payload: {
+      orderId,
+      customerName: formData.get("customerName"),
+      phone: formData.get("phone"),
+      email: formData.get("email") || "",
+      deliveryType: deliveryLabels[deliveryType],
+      date: formData.get("date"),
+      address: formData.get("address") || "",
+      items: [...cart.entries()].map(([id, quantity]) => {
+        const product = products.find((item) => item.id === id);
+        return {
+          id: product.id,
+          name: product.name,
+          quantity,
+          unit: product.unit,
+          unitPrice: product.price,
+          lineTotal: product.price * quantity,
+        };
+      }),
+      itemsText: itemLines.join("\n"),
+      subtotal,
+      deliveryFee,
+      total,
+      notes: formData.get("notes") || "",
+    },
     text: [
       `訂單編號：${orderId}`,
       `姓名：${formData.get("customerName")}`,
@@ -239,6 +266,21 @@ function buildOrderSummary(formData) {
   };
 }
 
+async function sendOrderToGoogleSheet(order) {
+  if (!GOOGLE_SCRIPT_URL) {
+    throw new Error("Google Sheet 尚未串接。");
+  }
+
+  await fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8",
+    },
+    body: JSON.stringify(order.payload),
+  });
+}
+
 productGrid.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-action]");
   if (!button) return;
@@ -253,7 +295,7 @@ productGrid.addEventListener("click", (event) => {
 
 orderForm.addEventListener("change", renderCart);
 
-orderForm.addEventListener("submit", (event) => {
+orderForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   if (cart.size === 0) {
@@ -267,11 +309,27 @@ orderForm.addEventListener("submit", (event) => {
 
   orderResult.hidden = false;
   orderResult.innerHTML = `
-    <h4>訂單已產生</h4>
-    <p>請確認內容後複製給店家。正式上線時可以把這段改接 Email、LINE 或資料庫。</p>
+    <h4>正在送出訂單</h4>
+    <p>請稍候，系統正在把訂單送到店家後台。</p>
     <pre>${order.text}</pre>
-    <button class="copy-button" type="button">複製訂單內容</button>
   `;
+
+  try {
+    await sendOrderToGoogleSheet(order);
+    orderResult.innerHTML = `
+      <h4>訂單已送出</h4>
+      <p>我們已收到你的訂單，店家會依照資料確認品項與取貨安排。</p>
+      <pre>${order.text}</pre>
+      <button class="copy-button" type="button">複製訂單內容</button>
+    `;
+  } catch (error) {
+    orderResult.innerHTML = `
+      <h4>訂單已產生，但尚未送到後台</h4>
+      <p>${error.message} 請先複製訂單內容給店家，或稍後再試一次。</p>
+      <pre>${order.text}</pre>
+      <button class="copy-button" type="button">複製訂單內容</button>
+    `;
+  }
 
   orderResult.querySelector(".copy-button").addEventListener("click", async () => {
     await navigator.clipboard.writeText(order.text);

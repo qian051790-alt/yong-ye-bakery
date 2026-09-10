@@ -19,8 +19,26 @@
 ├── script.js
 ├── assets/
 │   └── bakery-counter.png
+├── apps-script/
+│   └── Code.gs
 └── README.md
 ```
+
+## Google Sheet 訂單後台
+
+網站可以透過 Google Apps Script 把訂單寫入 Google Sheet。部署 GAS Web app 後，把 `/exec` 結尾的 URL 填到 `script.js`：
+
+```javascript
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/你的部署ID/exec";
+```
+
+部署設定建議：
+
+| 設定 | 選項 |
+| --- | --- |
+| Execute as | Me |
+| Who has access | Anyone |
+| Web app URL | 使用 `/exec` 結尾的正式部署網址 |
 
 ## GitHub Pages 上線方式
 
