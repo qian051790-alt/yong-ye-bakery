@@ -85,7 +85,8 @@ const deliveryLabels = {
   cold: "冷藏宅配",
 };
 
-const GOOGLE_SCRIPT_URL = "";
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbwExU1WEwAFhygMKpcxF42O2oSdYA5i-0iG-41MnC3YsHFy0XERRxlsfaNpXm_xc0qIfg/exec";
 
 const cart = new Map();
 
