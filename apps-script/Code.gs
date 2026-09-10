@@ -1,4 +1,4 @@
-const SPREADSHEET_ID = "請貼上你的 Google Sheet ID";
+const SPREADSHEET_ID = "1tgRHwfonek22mTBHL7pFoOswuH_vWXFS7eLrabGgkD0";
 const SHEET_NAME = "訂單";
 
 const HEADERS = [
