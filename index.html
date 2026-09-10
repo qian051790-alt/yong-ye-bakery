@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>勇冶手作麵包 | 商品、配送與線上訂購</title>
+    <meta
+      name="description"
+      content="勇冶手作麵包提供手作麵包、吐司、甜點與禮盒，支援自取與宅配訂購。"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="回到首頁">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span>
+          <strong>勇冶手作麵包</strong>
+          <small>每日新鮮出爐</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="主要導覽">
+        <a href="#products">商品</a>
+        <a href="#delivery">配送</a>
+        <a href="#order">訂購</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img src="assets/bakery-counter.png" alt="麵包坊櫃檯上擺滿剛出爐的麵包與可頌" />
+        <div class="hero-content">
+          <p class="eyebrow">家常口味 · 當日製作 · 可自取宅配</p>
+          <h1 id="hero-title">手作麵包與點心，今天想吃的先幫你留好。</h1>
+          <p>
+            選好商品、填寫取貨或配送資料，系統會幫你整理訂單明細與預估金額。
+          </p>
+          <a class="primary-link" href="#order">
+            <span aria-hidden="true">↓</span>
+            開始訂購
+          </a>
+        </div>
+      </section>
+
+      <section class="intro-band" aria-label="店家資訊">
+        <div>
+          <strong>出爐時間</strong>
+          <span>每日 09:30、14:30 兩批</span>
+        </div>
+        <div>
+          <strong>預訂時間</strong>
+          <span>前一日 18:00 前完成訂購</span>
+        </div>
+        <div>
+          <strong>付款方式</strong>
+          <span>店取付款、轉帳、貨到付款</span>
+        </div>
+      </section>
+
+      <section class="section" id="products" aria-labelledby="products-title">
+        <div class="section-heading">
+          <p class="eyebrow">Menu</p>
+          <h2 id="products-title">多元商品與價格</h2>
+          <p>品項可以直接加入訂單，後續也能在 `script.js` 裡調整價格、分類與庫存狀態。</p>
+        </div>
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="delivery section" id="delivery" aria-labelledby="delivery-title">
+        <div class="section-heading">
+          <p class="eyebrow">Delivery</p>
+          <h2 id="delivery-title">送貨服務</h2>
+          <p>目前設定為同城配送與指定日到貨，適合麵包坊先開始接單、再逐步串接正式金流與物流。</p>
+        </div>
+        <div class="delivery-grid">
+          <article>
+            <h3>店面自取</h3>
+            <p>營業日 11:00-19:00 可自取，請於訂單備註填寫希望取貨時段。</p>
+            <strong>免運費</strong>
+          </article>
+          <article>
+            <h3>市區配送</h3>
+            <p>5 公里內滿 NT$600 免運，未滿酌收 NT$80。建議前一日預訂。</p>
+            <strong>NT$80 起</strong>
+          </article>
+          <article>
+            <h3>冷藏宅配</h3>
+            <p>吐司、禮盒、甜點可安排冷藏宅配；可頌與硬歐建議自取或當日配送。</p>
+            <strong>NT$160 起</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="order section" id="order" aria-labelledby="order-title">
+        <div class="section-heading">
+          <p class="eyebrow">Order</p>
+          <h2 id="order-title">線上訂購</h2>
+          <p>選擇商品數量後，填寫聯絡資料。送出後會產生訂單編號與店家可處理的訂單摘要。</p>
+        </div>
+
+        <div class="order-layout">
+          <form class="order-form" id="orderForm">
+            <fieldset>
+              <legend>顧客資料</legend>
+              <label>
+                姓名
+                <input name="customerName" type="text" autocomplete="name" required />
+              </label>
+              <label>
+                電話
+                <input name="phone" type="tel" autocomplete="tel" required />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" autocomplete="email" />
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>取貨方式</legend>
+              <div class="choice-row">
+                <label>
+                  <input type="radio" name="deliveryType" value="pickup" checked />
+                  店面自取
+                </label>
+                <label>
+                  <input type="radio" name="deliveryType" value="local" />
+                  市區配送
+                </label>
+                <label>
+                  <input type="radio" name="deliveryType" value="cold" />
+                  冷藏宅配
+                </label>
+              </div>
+              <label>
+                取貨或配送日期
+                <input name="date" type="date" required />
+              </label>
+              <label>
+                地址或取貨時段
+                <textarea name="address" rows="3" placeholder="例如：下午 3 點自取，或填寫完整配送地址"></textarea>
+              </label>
+              <label>
+                備註
+                <textarea name="notes" rows="3" placeholder="例如：吐司切片、不要葡萄乾、生日禮盒"></textarea>
+              </label>
+            </fieldset>
+
+            <button class="submit-button" type="submit">
+              <span aria-hidden="true">✓</span>
+              產生訂單
+            </button>
+          </form>
+
+          <aside class="cart-panel" aria-labelledby="cart-title">
+            <h3 id="cart-title">訂單明細</h3>
+            <div id="cartItems" class="cart-items empty">尚未選擇商品</div>
+            <dl class="totals">
+              <div>
+                <dt>商品小計</dt>
+                <dd id="subtotal">NT$0</dd>
+              </div>
+              <div>
+                <dt>配送費</dt>
+                <dd id="deliveryFee">NT$0</dd>
+              </div>
+              <div class="grand-total">
+                <dt>預估總額</dt>
+                <dd id="total">NT$0</dd>
+              </div>
+            </dl>
+            <div class="order-result" id="orderResult" hidden></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>勇冶手作麵包 · 此範例可替換成實際地址、電話與營業時間。</p>
+      <a href="#top">回到上方</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
