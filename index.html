@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>勇冶手作麵包 | 商品、配送與線上訂購</title>
+    <title>勇冶手作麵包 | 中秋素蛋黃酥預訂</title>
     <meta
       name="description"
-      content="勇冶手作麵包提供手作麵包、吐司、甜點與禮盒，支援自取與宅配訂購。"
+      content="勇冶手作麵包推出中秋素蛋黃酥與葷食款蛋黃酥，支援單顆、6顆與15顆禮盒預訂。"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -16,7 +16,7 @@
         <span class="brand-mark" aria-hidden="true">B</span>
         <span>
           <strong>勇冶手作麵包</strong>
-          <small>每日新鮮出爐</small>
+          <small>中秋素蛋黃酥預訂</small>
         </span>
       </a>
       <nav class="nav" aria-label="主要導覽">
@@ -28,12 +28,15 @@
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <img src="assets/bakery-counter.png" alt="麵包坊櫃檯上擺滿剛出爐的麵包與可頌" />
+        <img
+          src="assets/egg-yolk-pastry-midautumn.png"
+          alt="中秋節禮盒旁擺放金黃酥皮蛋黃酥與切開的鹹蛋黃內餡"
+        />
         <div class="hero-content">
-          <p class="eyebrow">家常口味 · 當日製作 · 可自取宅配</p>
-          <h1 id="hero-title">手作麵包與點心，今天想吃的先幫你留好。</h1>
+          <p class="eyebrow">中秋限定 · 素食款與葷食款 · 可自取宅配</p>
+          <h1 id="hero-title">中秋素蛋黃酥，先為團圓留一盒。</h1>
           <p>
-            選好商品、填寫取貨或配送資料，系統會幫你整理訂單明細與預估金額。
+            素食款單顆 50 元，葷食款單顆 60 元；也可選 6 顆、15 顆組合，訂單會直接送到店家後台。
           </p>
           <a class="primary-link" href="#order">
             <span aria-hidden="true">↓</span>
@@ -44,24 +47,41 @@
 
       <section class="intro-band" aria-label="店家資訊">
         <div>
-          <strong>出爐時間</strong>
-          <span>每日 09:30、14:30 兩批</span>
+          <strong>預訂檔期</strong>
+          <span>素食款與葷食款皆可預訂</span>
         </div>
         <div>
           <strong>預訂時間</strong>
-          <span>前一日 18:00 前完成訂購</span>
+          <span>中秋前建議至少 3 天前完成</span>
         </div>
         <div>
           <strong>付款方式</strong>
-          <span>店取付款、轉帳、貨到付款</span>
+          <span>店取付款、轉帳、特殊規格另議</span>
         </div>
       </section>
 
       <section class="section" id="products" aria-labelledby="products-title">
         <div class="section-heading">
-          <p class="eyebrow">Menu</p>
-          <h2 id="products-title">多元商品與價格</h2>
-          <p>品項可以直接加入訂單，後續也能在 `script.js` 裡調整價格、分類與庫存狀態。</p>
+          <p class="eyebrow">Mid-Autumn Menu</p>
+          <h2 id="products-title">素食款與葷食款品項</h2>
+          <p>選好數量後即可送出預訂；口味搭配、盒子與手提袋需求請寫在備註。</p>
+        </div>
+        <div class="flavor-guide" aria-label="口味說明">
+          <article>
+            <h3>素食款</h3>
+            <p>紅豆＋素蛋黃或麻糬、芋頭＋素蛋黃或麻糬、綠豆＋梅子或素肉鬆。</p>
+            <strong>單顆 NT$50</strong>
+          </article>
+          <article>
+            <h3>葷食款</h3>
+            <p>紅豆＋蛋黃或麻糬、芋頭＋蛋黃或麻糬、綠豆＋蛋黃或素肉鬆。</p>
+            <strong>單顆 NT$60</strong>
+          </article>
+          <article>
+            <h3>特殊規格</h3>
+            <p>抹茶、小月餅、棗泥等餡料，每換一種口味加 NT$50；其他規格可另議。</p>
+            <strong>請於備註填寫</strong>
+          </article>
         </div>
         <div class="product-grid" id="productGrid" aria-live="polite"></div>
       </section>
@@ -70,23 +90,23 @@
         <div class="section-heading">
           <p class="eyebrow">Delivery</p>
           <h2 id="delivery-title">送貨服務</h2>
-          <p>目前設定為同城配送與指定日到貨，適合麵包坊先開始接單、再逐步串接正式金流與物流。</p>
+          <p>素蛋黃酥與禮盒皆為節慶預訂商品，建議提早安排自取或宅配，避開中秋前物流尖峰。</p>
         </div>
         <div class="delivery-grid">
           <article>
             <h3>店面自取</h3>
-            <p>營業日 11:00-19:00 可自取，請於訂單備註填寫希望取貨時段。</p>
+            <p>營業日 11:00-19:00 可自取，請於備註填寫希望取貨時段。</p>
             <strong>免運費</strong>
           </article>
           <article>
             <h3>市區配送</h3>
-            <p>5 公里內滿 NT$600 免運，未滿酌收 NT$80。建議前一日預訂。</p>
-            <strong>NT$80 起</strong>
+            <p>5 公里內滿 NT$1,200 免運，未滿酌收 NT$100。中秋前請提早預約。</p>
+            <strong>NT$100 起</strong>
           </article>
           <article>
-            <h3>冷藏宅配</h3>
-            <p>吐司、禮盒、甜點可安排冷藏宅配；可頌與硬歐建議自取或當日配送。</p>
-            <strong>NT$160 起</strong>
+            <h3>宅配到府</h3>
+            <p>禮盒可安排宅配，實際到貨日依物流狀況為準；團購可另行確認運費。</p>
+            <strong>NT$150 起</strong>
           </article>
         </div>
       </section>
@@ -129,7 +149,7 @@
                 </label>
                 <label>
                   <input type="radio" name="deliveryType" value="cold" />
-                  冷藏宅配
+                  宅配到府
                 </label>
               </div>
               <label>
@@ -142,7 +162,7 @@
               </label>
               <label>
                 備註
-                <textarea name="notes" rows="3" placeholder="例如：吐司切片、不要葡萄乾、生日禮盒"></textarea>
+                <textarea name="notes" rows="3" placeholder="例如：素食款紅豆素蛋黃 3 顆、芋頭麻糬 3 顆；需要盒子與手提袋"></textarea>
               </label>
             </fieldset>
 
@@ -176,10 +196,10 @@
     </main>
 
     <footer class="site-footer">
-      <p>勇冶手作麵包 · 此範例可替換成實際地址、電話與營業時間。</p>
+      <p>勇冶手作麵包 · 中秋素蛋黃酥預訂開放中。</p>
       <a href="#top">回到上方</a>
     </footer>
 
-    <script src="script.js?v=20260910-1108"></script>
+    <script src="script.js?v=20260912-vegetarian-yolk-preview"></script>
   </body>
 </html>
