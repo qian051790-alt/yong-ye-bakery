@@ -322,34 +322,39 @@ textarea {
 }
 
 
-.schedule-grid {
+.notice-panel {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: 1.05fr 1.35fr 1fr;
   gap: 1rem;
 }
 
-.schedule-grid article {
+.notice-panel > div {
   display: grid;
-  gap: 0.35rem;
-  min-height: 132px;
-  align-content: center;
-  padding: 1.2rem;
+  gap: 0.55rem;
+  align-content: start;
+  padding: 1.25rem;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 10px 30px rgba(23, 32, 29, 0.06);
 }
 
-.schedule-grid span {
+.notice-panel span {
   color: var(--berry);
   font-size: 0.9rem;
   font-weight: 900;
 }
 
-.schedule-grid strong {
-  font-size: 1.4rem;
-  line-height: 1.25;
+.notice-panel strong {
+  font-size: 1.35rem;
+  line-height: 1.3;
 }
+
+.notice-panel p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .delivery {
   max-width: none;
   background: #e9eee8;
@@ -580,7 +585,7 @@ a:focus-visible {
 
 @media (max-width: 980px) {
   .product-grid,
-  .schedule-grid,
+  .notice-panel,
   .delivery-grid,
   .order-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -618,7 +623,7 @@ a:focus-visible {
   }
 
   .intro-band,
-  .schedule-grid,
+  .notice-panel,
   .product-grid,
   .delivery-grid,
   .order-layout,
@@ -630,5 +635,7 @@ a:focus-visible {
     min-height: auto;
   }
 }
+
+
 
 
