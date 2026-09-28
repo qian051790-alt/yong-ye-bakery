@@ -396,7 +396,9 @@ textarea {
 
 .today-bake-empty {
   color: var(--muted);
-}.delivery {
+}
+
+.delivery {
   max-width: none;
   background: #e9eee8;
 }
