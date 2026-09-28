@@ -8,7 +8,7 @@
       name="description"
       content="勇冶手作麵包提供生吐司、餐包、蛋糕吐司與蛋糕，支援自取與配送訂購。"
     />
-    <link rel="stylesheet" href="styles.css?v=20260928-announcement-template" />
+    <link rel="stylesheet" href="styles.css?v=20260928-today-bake" />
   </head>
   <body>
     <header class="site-header">
@@ -59,31 +59,14 @@
       </section>
 
       <section class="schedule section" id="schedule" aria-labelledby="schedule-title">
-        <div class="announcement-layout">
-          <div class="section-heading announcement-heading">
-            <p class="eyebrow">Today Bake</p>
-            <h2 id="schedule-title">今日出爐公告</h2>
-            <p>這裡會用類似 LINE 公告的方式，讓客人快速知道今日或近期可安排的品項。實際出爐仍會依當日訂單、發酵與備料狀況調整。</p>
-          </div>
+        <div class="section-heading">
+          <p class="eyebrow">Today Bake</p>
+          <h2 id="schedule-title">今日出爐</h2>
+          <p>每日品項會依麵包師傅當天的訂單、發酵時間與備料狀況調整。想吃的品項可以先填單，店家會再確認是否能安排。</p>
+        </div>
 
-          <article class="daily-board" aria-label="今日出爐公告內容範例">
-            <p class="board-date">今日／近期可先詢問：</p>
-            <ol>
-              <li>生吐司</li>
-              <li>餐包，可混搭口味</li>
-              <li>蛋糕吐司</li>
-              <li>原味戚風蛋糕</li>
-              <li>巧克力戚風蛋糕</li>
-            </ol>
-            <p>因為每天都是少量手作，訂單數量滿爐後，就會先依序排單製作。</p>
-            <p class="board-ps">P.S. 若想確認今天實際有什麼，可以先填單或在備註留下想詢問的品項。</p>
-          </article>
-
-          <aside class="notice-helper">
-            <strong>想訂今天的麵包？</strong>
-            <p>可以先到下方選商品並送出訂單；若當天品項已滿或沒有製作，店家會再和你確認改日期或推薦替代口味。</p>
-            <a href="#order">前往訂購</a>
-          </aside>
+        <div class="today-bake-card" id="todayBakeNotice" aria-live="polite">
+          <div class="today-bake-empty">今日出爐內容準備中。</div>
         </div>
       </section>
       <section class="section" id="products" aria-labelledby="products-title">

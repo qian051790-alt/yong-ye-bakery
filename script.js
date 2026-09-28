@@ -1,3 +1,10 @@
+const todayBakeNotice = {
+  dateLabel: "今日出爐",
+  status: "每日更新",
+  title: "今天可先詢問的品項",
+  items: ["生吐司", "餐包（可混搭）", "蛋糕吐司", "戚風蛋糕"],
+  note: "實際出爐品項會依當日訂單、發酵與備料狀況調整。若品項已滿或當天未製作，店家會再和你確認改日期或替代口味。",
+};
 const products = [
   {
     id: "chocolate-toast",
@@ -171,6 +178,23 @@ function formatPrice(amount) {
   return currency.format(amount).replace("NT$", "NT$");
 }
 
+function renderTodayBakeNotice() {
+  const noticeEl = document.querySelector("#todayBakeNotice");
+  if (!noticeEl) return;
+
+  noticeEl.innerHTML = `
+    <div class="today-bake-topline">
+      <span>${todayBakeNotice.dateLabel}</span>
+      <strong>${todayBakeNotice.status}</strong>
+    </div>
+    <h3>${todayBakeNotice.title}</h3>
+    <ul>
+      ${todayBakeNotice.items.map((item) => `<li>${item}</li>`).join("")}
+    </ul>
+    <p>${todayBakeNotice.note}</p>
+    <a href="#order">我要詢問或訂購</a>
+  `;
+}
 function renderProducts() {
   productGrid.innerHTML = products
     .map(
@@ -401,7 +425,7 @@ orderForm.addEventListener("submit", async (event) => {
   });
 });
 
+renderTodayBakeNotice();
 renderProducts();
 renderCart();
-
 
