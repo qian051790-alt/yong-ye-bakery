@@ -8,7 +8,7 @@ const fallbackTodayBakeNotice = {
 const products = [
   {
     id: "chocolate-toast",
-    name: "巧克力吐司",
+    name: "巧克力生吐司",
     category: "生吐司",
     description: "柔軟生吐司加入巧克力香氣，適合早餐、下午茶或切片分享。",
     price: 150,
