@@ -1,4 +1,4 @@
-const todayBakeNotice = {
+const fallbackTodayBakeNotice = {
   dateLabel: "今日出爐",
   status: "每日更新",
   title: "今天可先詢問的品項",
@@ -157,6 +157,7 @@ const deliveryLabels = {
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbwExU1WEwAFhygMKpcxF42O2oSdYA5i-0iG-41MnC3YsHFy0XERRxlsfaNpXm_xc0qIfg/exec";
+const TODAY_BAKE_TIMEOUT_MS = 5000;
 
 const cart = new Map();
 
@@ -178,22 +179,59 @@ function formatPrice(amount) {
   return currency.format(amount).replace("NT$", "NT$");
 }
 
-function renderTodayBakeNotice() {
+function renderTodayBakeNotice(notice = fallbackTodayBakeNotice) {
   const noticeEl = document.querySelector("#todayBakeNotice");
   if (!noticeEl) return;
 
+  const items = Array.isArray(notice.items) && notice.items.length > 0 ? notice.items : fallbackTodayBakeNotice.items;
+  const dateLabel = notice.dateLabel || fallbackTodayBakeNotice.dateLabel;
+  const status = notice.status || fallbackTodayBakeNotice.status;
+  const title = notice.title || fallbackTodayBakeNotice.title;
+  const note = notice.note || fallbackTodayBakeNotice.note;
+
   noticeEl.innerHTML = `
     <div class="today-bake-topline">
-      <span>${todayBakeNotice.dateLabel}</span>
-      <strong>${todayBakeNotice.status}</strong>
+      <span>${dateLabel}</span>
+      <strong>${status}</strong>
     </div>
-    <h3>${todayBakeNotice.title}</h3>
+    <h3>${title}</h3>
     <ul>
-      ${todayBakeNotice.items.map((item) => `<li>${item}</li>`).join("")}
+      ${items.map((item) => `<li>${item}</li>`).join("")}
     </ul>
-    <p>${todayBakeNotice.note}</p>
+    <p>${note}</p>
     <a href="#order">我要詢問或訂購</a>
   `;
+}
+
+function loadTodayBakeNotice() {
+  if (!GOOGLE_SCRIPT_URL) return;
+
+  const callbackName = `receiveTodayBake${Date.now()}`;
+  const script = document.createElement("script");
+  const timeoutId = window.setTimeout(() => {
+    cleanup();
+  }, TODAY_BAKE_TIMEOUT_MS);
+
+  function cleanup() {
+    window.clearTimeout(timeoutId);
+    delete window[callbackName];
+    script.remove();
+  }
+
+  window[callbackName] = (response) => {
+    cleanup();
+    if (response && response.ok) {
+      renderTodayBakeNotice(response);
+    }
+  };
+
+  const url = new URL(GOOGLE_SCRIPT_URL);
+  url.searchParams.set("action", "todayBake");
+  url.searchParams.set("callback", callbackName);
+  url.searchParams.set("v", String(Date.now()));
+  script.src = url.toString();
+  script.onerror = cleanup;
+  document.body.appendChild(script);
 }
 function renderProducts() {
   productGrid.innerHTML = products
@@ -426,6 +464,7 @@ orderForm.addEventListener("submit", async (event) => {
 });
 
 renderTodayBakeNotice();
+loadTodayBakeNotice();
 renderProducts();
 renderCart();
 

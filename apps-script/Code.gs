@@ -1,5 +1,6 @@
 const SPREADSHEET_ID = "1tgRHwfonek22mTBHL7pFoOswuH_vWXFS7eLrabGgkD0";
-const SHEET_NAME = "訂單";
+const ORDER_SHEET_NAME = "訂單";
+const TODAY_BAKE_SHEET_NAME = "今日出爐";
 
 const HEADERS = [
   "時間",
@@ -18,7 +19,14 @@ const HEADERS = [
   "狀態",
 ];
 
-function doGet() {
+function doGet(e) {
+  const action = e && e.parameter && e.parameter.action;
+
+  if (action === "todayBake") {
+    const payload = getTodayBakePayload();
+    return jsonOrJsonpResponse(payload, e.parameter.callback);
+  }
+
   return ContentService.createTextOutput("勇冶手作麵包訂單 API 已啟用");
 }
 
@@ -51,6 +59,83 @@ function doPost(e) {
   }
 }
 
+function getTodayBakePayload() {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = spreadsheet.getSheetByName(TODAY_BAKE_SHEET_NAME);
+
+  const fallback = {
+    ok: true,
+    dateLabel: "今日出爐",
+    status: "每日更新",
+    title: "今天可先詢問的品項",
+    items: ["生吐司"],
+    note: "實際出爐品項會依當日訂單、發酵與備料狀況調整。若品項已滿或當天未製作，店家會再和你確認改日期或替代口味。",
+  };
+
+  if (!sheet || sheet.getLastRow() === 0) {
+    return fallback;
+  }
+
+  const rows = sheet.getDataRange().getDisplayValues();
+  const items = [];
+  let note = fallback.note;
+  let status = fallback.status;
+  let title = fallback.title;
+
+  rows.forEach((row, index) => {
+    const first = String(row[0] || "").trim();
+    const second = String(row[1] || "").trim();
+
+    if (!first && !second) return;
+
+    if (first === "標題" && second) {
+      title = second;
+      return;
+    }
+
+    if (first === "狀態" && second) {
+      status = second;
+      return;
+    }
+
+    if (first === "備註" && second) {
+      note = second;
+      return;
+    }
+
+    if (["今日出爐", "品項", "顯示"].includes(first) && index === 0) {
+      return;
+    }
+
+    if (first.toUpperCase() === "TRUE" && second) {
+      items.push(second);
+      return;
+    }
+
+    if (first.toUpperCase() === "FALSE") {
+      return;
+    }
+
+    if (second && !first) {
+      items.push(second);
+      return;
+    }
+
+    if (first) {
+      items.push(first);
+    }
+  });
+
+  return {
+    ok: true,
+    dateLabel: "今日出爐",
+    status,
+    title,
+    items: items.length > 0 ? items : fallback.items,
+    note,
+  };
+}
+
 function parseRequestBody(e) {
   if (!e || !e.postData || !e.postData.contents) {
     throw new Error("沒有收到訂單資料");
@@ -61,7 +146,7 @@ function parseRequestBody(e) {
 
 function getOrderSheet() {
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-  return spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.insertSheet(SHEET_NAME);
+  return spreadsheet.getSheetByName(ORDER_SHEET_NAME) || spreadsheet.insertSheet(ORDER_SHEET_NAME);
 }
 
 function ensureHeaderRow(sheet) {
@@ -78,4 +163,17 @@ function jsonResponse(payload) {
   return ContentService.createTextOutput(JSON.stringify(payload)).setMimeType(
     ContentService.MimeType.JSON,
   );
+}
+
+function jsonOrJsonpResponse(payload, callback) {
+  const json = JSON.stringify(payload);
+
+  if (callback) {
+    const safeCallback = String(callback).replace(/[^a-zA-Z0-9_$\.]/g, "");
+    return ContentService.createTextOutput(`${safeCallback}(${json});`).setMimeType(
+      ContentService.MimeType.JAVASCRIPT,
+    );
+  }
+
+  return jsonResponse(payload);
 }
