@@ -2,7 +2,7 @@ const todayBakeNotice = {
   dateLabel: "今日出爐",
   status: "每日更新",
   title: "今天可先詢問的品項",
-  items: ["生吐司", "餐包（可混搭）", "蛋糕吐司", "戚風蛋糕"],
+  items: ["生吐司"],
   note: "實際出爐品項會依當日訂單、發酵與備料狀況調整。若品項已滿或當天未製作，店家會再和你確認改日期或替代口味。",
 };
 const products = [
