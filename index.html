@@ -8,7 +8,7 @@
       name="description"
       content="勇冶手作麵包提供生吐司、餐包、蛋糕吐司與蛋糕，支援自取與配送訂購。"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260928-daily-announcement" />
   </head>
   <body>
     <header class="site-header">
@@ -59,30 +59,34 @@
       </section>
 
       <section class="schedule section" id="schedule" aria-labelledby="schedule-title">
-        <div class="section-heading">
-          <p class="eyebrow">Today Bake</p>
-          <h2 id="schedule-title">今天想吃什麼，可以先幫你問問看</h2>
-          <p>勇冶每天由一位麵包師傅慢慢製作，出爐品項會跟著訂單、發酵時間和備料狀況調整。你可以先挑想吃的品項送出訂單，我們會再和你確認今天或本週能不能安排。</p>
-        </div>
-        <div class="notice-panel">
-          <div>
-            <span>今日出爐</span>
-            <strong>每天不一定一樣，但都會認真做</strong>
-            <p>想知道今天有沒有你想吃的口味，可以直接填單，在備註寫下想詢問的品項。</p>
+        <div class="announcement-layout">
+          <div class="section-heading announcement-heading">
+            <p class="eyebrow">Today Bake</p>
+            <h2 id="schedule-title">今日出爐公告</h2>
+            <p>每天由麵包師傅依訂單、發酵與備料狀況安排品項。公告內容會以當日實際製作為主，想吃的品項也可以先填單詢問。</p>
           </div>
-          <div>
-            <span>本週可預訂</span>
-            <strong>生吐司、餐包、蛋糕吐司、戚風蛋糕</strong>
-            <p>餐包可以混搭；蛋糕吐司與戚風蛋糕建議提早說，我們比較好幫你排進製作時間。</p>
-          </div>
-          <div>
-            <span>小店提醒</span>
-            <strong>送出後，我們會再跟你確認一次</strong>
-            <p>如果當天做不到指定品項，我們會和你討論改日期，或推薦接近的口味給你。</p>
-          </div>
+
+          <article class="daily-board" aria-label="今日出爐公告內容範例">
+            <p class="board-date">今日預定出爐麵包：</p>
+            <ol>
+              <li>素肉鬆餐包</li>
+              <li>黑芝麻餐包</li>
+              <li>起司餐包</li>
+              <li>奶酥餐包</li>
+              <li>維也納餐包</li>
+              <li>原味餐包</li>
+            </ol>
+            <p>感謝大家大力支持，訂單數量滿爐後，就先排單生產。</p>
+            <p class="board-ps">P.S. 原味的甜麵包不加任何餡料，可以自己包喜歡的餡料，或直接吃也很好吃。</p>
+          </article>
+
+          <aside class="notice-helper">
+            <strong>想訂今天的麵包？</strong>
+            <p>可以先到下方選商品並送出訂單；若當天品項已滿或沒有製作，店家會再和你確認改日期或推薦替代口味。</p>
+            <a href="#order">前往訂購</a>
+          </aside>
         </div>
       </section>
-
       <section class="section" id="products" aria-labelledby="products-title">
         <div class="section-heading">
           <p class="eyebrow">Menu</p>
