@@ -226,6 +226,43 @@ textarea {
 
 .product-grid {
   display: grid;
+  gap: 2rem;
+}
+
+.product-group {
+  display: grid;
+  gap: 1rem;
+}
+
+.product-group + .product-group {
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.product-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.product-group-heading h3 {
+  margin: 0;
+  font-size: clamp(1.55rem, 3vw, 2.25rem);
+  line-height: 1.15;
+}
+
+.product-group-heading span {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: #e9f2ec;
+  color: var(--leaf-dark);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.product-group-grid {
+  display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
 }
@@ -627,7 +664,7 @@ a:focus-visible {
 }
 
 @media (max-width: 980px) {
-  .product-grid,
+  .product-group-grid,
   .delivery-grid,
   .order-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -665,7 +702,7 @@ a:focus-visible {
   }
 
   .intro-band,
-  .product-grid,
+  .product-group-grid,
   .delivery-grid,
   .order-layout,
   .choice-row {
@@ -680,9 +717,4 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 }
-
-
-
-
-
 

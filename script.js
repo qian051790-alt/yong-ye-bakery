@@ -126,7 +126,7 @@ const products = [
   {
     id: "plain-chiffon-cake",
     name: "原味戚風蛋糕",
-    category: "戚風蛋糕",
+    category: "蛋糕",
     description: "原味戚風蛋糕，口感輕盈柔軟。",
     price: 150,
     unit: "個",
@@ -135,7 +135,7 @@ const products = [
   {
     id: "chocolate-chiffon-cake",
     name: "巧克力戚風蛋糕",
-    category: "戚風蛋糕",
+    category: "蛋糕",
     description: "巧克力戚風蛋糕，香氣濃郁、口感蓬鬆。",
     price: 150,
     unit: "個",
@@ -233,36 +233,55 @@ function loadTodayBakeNotice() {
   script.onerror = cleanup;
   document.body.appendChild(script);
 }
+const productCategoryOrder = ["生吐司", "餐包", "蛋糕吐司", "蛋糕"];
+
+function renderProductCard(product) {
+  return `
+    <article class="product-card">
+      <div>
+        <div class="product-meta">
+          <span class="category">${product.category}</span>
+          <span class="stock">${product.stock}</span>
+        </div>
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+      </div>
+      <div>
+        <div class="price-row">
+          <span class="price">${formatPrice(product.price)}</span>
+          <span>/${product.unit}</span>
+        </div>
+        <div class="quantity-row">
+          <span>數量</span>
+          <div class="stepper" aria-label="${product.name} 數量">
+            <button type="button" data-action="decrease" data-id="${product.id}" aria-label="減少 ${product.name}">−</button>
+            <output id="qty-${product.id}">0</output>
+            <button type="button" data-action="increase" data-id="${product.id}" aria-label="增加 ${product.name}">＋</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
 function renderProducts() {
-  productGrid.innerHTML = products
-    .map(
-      (product) => `
-        <article class="product-card">
-          <div>
-            <div class="product-meta">
-              <span class="category">${product.category}</span>
-              <span class="stock">${product.stock}</span>
-            </div>
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
+  productGrid.innerHTML = productCategoryOrder
+    .map((categoryName) => {
+      const categoryProducts = products.filter((product) => product.category === categoryName);
+      if (categoryProducts.length === 0) return "";
+
+      return `
+        <section class="product-group" aria-labelledby="product-group-${categoryName}">
+          <div class="product-group-heading">
+            <h3 id="product-group-${categoryName}">${categoryName}</h3>
+            <span>${categoryProducts.length} 項</span>
           </div>
-          <div>
-            <div class="price-row">
-              <span class="price">${formatPrice(product.price)}</span>
-              <span>/${product.unit}</span>
-            </div>
-            <div class="quantity-row">
-              <span>數量</span>
-              <div class="stepper" aria-label="${product.name} 數量">
-                <button type="button" data-action="decrease" data-id="${product.id}" aria-label="減少 ${product.name}">−</button>
-                <output id="qty-${product.id}">0</output>
-                <button type="button" data-action="increase" data-id="${product.id}" aria-label="增加 ${product.name}">＋</button>
-              </div>
-            </div>
+          <div class="product-group-grid">
+            ${categoryProducts.map(renderProductCard).join("")}
           </div>
-        </article>
-      `,
-    )
+        </section>
+      `;
+    })
     .join("");
 }
 
